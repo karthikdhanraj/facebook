@@ -13,10 +13,13 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 	
@@ -52,8 +55,12 @@ public class BaseClass {
 	public static WebDriver LaunchBrowser(String browser) {
 		
 		if (browser.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\ADMIN\\eclipse-selenium\\facebook\\driver\\chromedriver.exe");
+			WebDriverManager.chromedriver().setup();
+		    ChromeOptions options = new ChromeOptions();
+		    
 		    driver = new ChromeDriver();
+		    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		    driver.manage().window().maximize();
 			
 		}else if (browser.equalsIgnoreCase("edge")) {
 			driver = new EdgeDriver();
@@ -144,7 +151,8 @@ public class BaseClass {
 		
 			TakesScreenshot tk = (TakesScreenshot) driver;
 			File Sour = tk.getScreenshotAs(OutputType.FILE);
-			File Des = new File("C:\\Users\\ADMIN\\eclipse-selenium\\facebook\\Report\\screenshot\\" + name + ".png");
+			
+			File Des = new File(System.getProperty("user.dir") + "/Report/screenshot/"+name+".png");
 			
 			FileUtils.copyFile(Sour, Des);
 		} 

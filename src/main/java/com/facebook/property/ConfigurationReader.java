@@ -67,6 +67,30 @@ public class ConfigurationReader {
 
 	}
 	
+	public String getDob() {
+		String dob = p.getProperty("dob");
+		return dob;
+		
+	}
+	
+	public String getEmailId() {
+		String emailId = p.getProperty("email");
+		return emailId;
+
+	}
+	
+	public String getNewPassword() {
+		String newPassword = p.getProperty("newpassword");
+		return newPassword;
+
+	}
+	
+	public String getGender() {
+		String getGender =p.getProperty("gender");
+		return getGender;
+
+	}
+	
 	
 	
 }
